@@ -1,0 +1,102 @@
+Steps
+---------
+(0) Start Docker Images
+run  = docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+stop = docker-compose -f docker-compose.yml -f docker-compose.override.yml down
+--
+See images
+docker images
+
+See running containers
+docker ps
+--
+See application locally
+TEST
+http://localhost:8000/swagger/index.html
+http://localhost:8001/
+--
+Stop Running Containers
+stop = docker-compose -f docker-compose.yml -f docker-compose.override.yml down
+
+1) az login
+
+2) az acr create --resource-group TestRG --name adjusterassignmentacr --sku Basic
+
+3) az acr update --resource-group TestRG --name adjusterassignmentacr --admin-enabled true
+
+4) az acr login --name adjusterassignmentacr
+
+(5)
+--
+Tag a container image
+
+docker tag adjusterassignmentapi:dev adjusterassignmentacr.azurecr.io/adjusterassignmentapi:v1
+--
+
+(6) Push the tagged images to ACR
+------------------------------------
+Push images to registry
+
+docker push adjusterassignmentacr.azurecr.io/adjusterassignmentapi:v1
+
+(7)List images in registry
+az acr repository list --name adjusterassignmentacr --output table
+
+(8) See tags
+az acr repository show-tags --name adjusterassignmentacr --repository adjusterassignmentapi --output table
+
+(9) Create AKS cluster with attaching ACR
+az aks create --resource-group TestRG --name myAKSCluster --node-count 1 --generate-ssh-keys --attach-acr adjusterassignmentacr
+
+(10)--
+Install the Kubernetes CLI
+az aks install-cli
+--
+(11)
+Connect to cluster using kubectl
+az aks get-credentials --resource-group TestRG --name myAKSCluster
+
+
+(12)
+--
+Check Kube Config
+
+kubectl config get-contexts
+kubectl config current-context
+----kubectl config use-context gcpcluster-k8s-1
+	-------------Switched to context "gcpcluster-k8s-1"-----
+
+(13) Create pull secret for ACR container
+------------------------------------------
+Login server name --> az acr list --resource-group TestRG --query "[].{acrLoginServer:loginServer}" --output table
+
+Syntax --> kubectl create secret docker-registry registry-credentials —-docker-server=REGISTRY_FQDN —-docker-username=USERNAME 
+—-docker-password=PASSWORD —-docker-email=EMAIL
+
+Command --> kubectl create secret docker-registry registry-credentials —-docker-server=adjusterassignmentacr.azurecr.io —-docker-username=adjusterassignmentacr —-docker-password=ZI+PvJZmPoNOeKOPqK4qd7TnlQxm7PH3 —-docker-email=sudheepm@in.ibm.com
+
+
+(14) Deploy the API 
+-----------------------
+kubectl apply -f .\aks
+
+
+kubectl get all
+
+kubectl get pods
+
+kubectl get nodes
+
+kodectl describe <podno> ---- trouble shoot.
+
+
+
+kubectl delete -f .\aks
+
+(15) When the deployment completes, you can access the Kubernetes Web UI with a local proxy, using an ssh tunnel.
+
+Assign the cluster role binding - kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+
+Command to start proxy - az aks browse --resource-group TestRG --name myAKSCluster
+
+

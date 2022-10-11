@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "f2SFlgreujMKBPC+hHZWnsiMOSLG5G6ZMICIJeIfBSCCJ20nLoBbTh3YCgiYnbbGOV/zFqpMqo/5WE6N28sjCw==",
+  "success": true,
+  "projectFilePath": "C:\\Architects Assets\\Practice-Service\\AdjusterAssignmentApp\\AdjusterAssignment\\AdjusterAssignment\\AdjusterAssignmentUI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\000O9O744\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}

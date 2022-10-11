@@ -1,0 +1,49 @@
+/* _content/AdjusterAssignmentUI/Pages/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-mxls4yntjl] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-mxls4yntjl] {
+  color: #0077cc;
+}
+
+.btn-primary[b-mxls4yntjl] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-mxls4yntjl], .nav-pills .show > .nav-link[b-mxls4yntjl] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-mxls4yntjl] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-mxls4yntjl] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-mxls4yntjl] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-mxls4yntjl] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-mxls4yntjl] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
